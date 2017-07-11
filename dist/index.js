@@ -4,7 +4,8 @@ var timeElement = document.getElementById('time');
 var timeRemainElement = document.getElementById('timeRemain');
 
 go.addEventListener('click', function () {
-
+    clearInterval(timer);
+    
     var time = timeElement.value;
     if (!time.length || isNaN(time)) { return; }
 
