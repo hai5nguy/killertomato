@@ -7,7 +7,7 @@ var timeRemainElement = document.getElementById('timeRemain');
 
 go.addEventListener('click', function () {
     var minutes = timeElement.value;
-    if (!time.length || isNaN(time)) { return; }
+    if (!minutes.length || isNaN(minutes)) { return; }
     startTimer(minutes);
 });
 
