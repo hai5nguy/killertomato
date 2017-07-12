@@ -29,7 +29,12 @@ function showTime(seconds) {
 
 function showPopup() {
     var win = window.open("", "Time up", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=200, top=" + (screen.height / 2 - 300) + ", left=" + (screen.width / 2 - 150));
-    win.document.body.innerHTML = "killer tomato";
+    win.document.body.innerHTML = "<div>Killer Tomato!</div>";
+    
+    var script = win.document.createElement('script');
+    script.type = 'text/javascript';
+    script.innerHTML='setInterval(function () { document.title = document.title === "Done" ? "Killer Tomato" : "Done"}, 1000)';
+    win.document.body.appendChild(script);
 }
 
 function startTimer(minutes) {
