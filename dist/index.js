@@ -20,10 +20,21 @@ five.addEventListener('click', function () {
     startTimer(5);
 });
 
-function flashTitle() {
-    flashTimer = setInterval(function () {
-        document.title = document.title === 'Done' ? 'Killer Tomato' : 'Done';
-    }, 1000);
+function flashNotification() {
+    showNotification();
+    flashTimer = setInterval(showNotification, 6000);
+    function showNotification() {
+        var notification = new Notification('Time up.', {
+            icon: 'https://killertomato.herokuapp.com/favicon-96x96.png',
+            body: "Time up."
+        });
+        notification.onclick = function () {
+            notification.close();
+            clearInterval(flashTimer);
+            parent.focus();
+            window.focus();
+        };
+    }
 }
 
 function showTime(seconds) {
@@ -33,21 +44,21 @@ function showTime(seconds) {
     timeRemainElement.innerHTML = m + ':' + s;
 }
 
-function showPopup() {
-    var win = window.open("", "Time up", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=200, top=" + (screen.height / 2 - 300) + ", left=" + (screen.width / 2 - 150));
-    win.document.body.innerHTML = "<div>Killer Tomato!</div>";
-    
-    var script = win.document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML='setInterval(function () { document.title = document.title === "Done" ? "Killer Tomato" : "Done"}, 1000)';
-    win.document.body.appendChild(script);
-}
+// function showPopup() {
+//     var win = window.open("", "Time up", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=300, height=200, top=" + (screen.height / 2 - 300) + ", left=" + (screen.width / 2 - 150));
+//     win.document.body.innerHTML = "<div>Killer Tomato!</div>";
+
+//     var script = win.document.createElement('script');
+//     script.type = 'text/javascript';
+//     script.innerHTML = 'setInterval(function () { document.title = document.title === "Done" ? "Killer Tomato" : "Done"}, 1000)';
+//     win.document.body.appendChild(script);
+// }
 
 function startTimer(minutes) {
     clearInterval(flashTimer);
     clearInterval(timer);
     document.title = 'Killer Tomato';
-    
+
     var seconds = minutes * 60;
     showTime(seconds);
 
@@ -56,11 +67,11 @@ function startTimer(minutes) {
 
         if (seconds <= 0) {
             clearInterval(timer);
-            showPopup();
-            flashTitle();
+            // showPopup();
+            flashNotification();
         }
 
         showTime(seconds);
-        
+
     }, 1000);
 }
