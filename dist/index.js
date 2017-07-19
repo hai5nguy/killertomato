@@ -22,7 +22,7 @@ five.addEventListener('click', function () {
 
 function flashTitle() {
     flashTimer = setInterval(function () {
-        document.title = document.title === "Done" ? "Killer Tomato" : "Done";
+        document.title = document.title === 'Done' ? 'Killer Tomato' : 'Done';
     }, 1000);
 }
 
@@ -46,6 +46,7 @@ function showPopup() {
 function startTimer(minutes) {
     clearInterval(flashTimer);
     clearInterval(timer);
+    document.title = 'Killer Tomato';
     
     var seconds = minutes * 60;
     showTime(seconds);
