@@ -1,4 +1,5 @@
 var timer;
+var flashTimer;
 var go = document.getElementById('go');
 var twentyFive = document.getElementById('twenty-five');
 var five = document.getElementById('five');
@@ -19,6 +20,11 @@ five.addEventListener('click', function () {
     startTimer(5);
 });
 
+function flashTitle() {
+    flashTimer = setInterval(function () {
+        document.title = document.title === "Done" ? "Killer Tomato" : "Done";
+    }, 1000);
+}
 
 function showTime(seconds) {
     var m = Math.floor(seconds / 60);
@@ -38,6 +44,7 @@ function showPopup() {
 }
 
 function startTimer(minutes) {
+    clearInterval(flashTimer);
     clearInterval(timer);
     
     var seconds = minutes * 60;
@@ -49,6 +56,7 @@ function startTimer(minutes) {
         if (seconds <= 0) {
             clearInterval(timer);
             showPopup();
+            flashTitle();
         }
 
         showTime(seconds);
