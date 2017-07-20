@@ -20,13 +20,13 @@ five.addEventListener('click', function () {
     startTimer(5);
 });
 
-function flashNotification() {
+function flashNotification(message) {
     showNotification();
     flashTimer = setInterval(showNotification, 7000);
     function showNotification() {
-        var notification = new Notification('Time up.', {
+        var notification = new Notification(message, {
             icon: 'https://killertomato.herokuapp.com/favicon-96x96.png',
-            body: '🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜🕜'
+            body: '🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛'
         });
         notification.onclick = function () {
             notification.close();
@@ -68,7 +68,7 @@ function startTimer(minutes) {
         if (seconds <= 0) {
             clearInterval(timer);
             // showPopup();
-            flashNotification();
+            flashNotification(minutes + ' minutes done!');
         }
 
         showTime(seconds);
